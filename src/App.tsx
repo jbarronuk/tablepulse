@@ -1,34 +1,19 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import './App.css'
+import HomePage from './HomePage'
+import UsersPage from './UsersPage'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function App() {  
   return (
-    <>
-      <section id="center">
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <section id="spacer"></section>
-      <section>
-        <h1>TODO</h1>
-        <p>Get something on github</p>
-        <p>grab the user count from supabase</p>
-        <p>add a vite env or similar to store the tables we're grabbing from</p>
-        <p>Add password page - store a fixed password somewhere</p>
-        <p>add graph showing days users joined (created)</p>
-      </section>
-    </>
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/users">Users</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/users" element={<UsersPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
