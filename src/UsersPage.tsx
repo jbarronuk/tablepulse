@@ -1,13 +1,9 @@
 import SimpleBarChart from './components/BarChart'
+import { useDailyCounts } from './hooks/useDailyCounts'
 
 function UsersPage() {
+  const { data, error } = useDailyCounts('profiles', 30)
   
-  const data = [
-    {label: '15/11/26', count: 299},
-    {label: '14/11/26', count: 101},
-    {label: '13/11/26', count: 101},
-  ]
-
   return (
     <SimpleBarChart days={data} name="Users"/>
   )

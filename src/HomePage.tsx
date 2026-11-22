@@ -1,11 +1,33 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useSession } from './hooks/useSession'
 
 function HomePage() {
   const [count, setCount] = useState(0)
+  const { signIn } = useSession()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
+  async function handleSubmit(e: React.FormEvent) {
+      e.preventDefault()
+      const error = await signIn('', '')
+      if (error) {
+        console.log(error)
+      } else {
+        console.log("Logged in!")
+      }
+  }
   return (
-    <>
+    <> 
       <section id="center">
+        <form onSubmit={handleSubmit}>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
+          <button type="submit">Sign In</button>
+        </form>
+        <button
+          type="button"
+          onClick={async () => {signIn('', '')}}
+        >Login</button>
         <button
           type="button"
           className="counter"
