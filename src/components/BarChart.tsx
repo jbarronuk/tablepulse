@@ -11,10 +11,10 @@ type Props = {
 const SimpleBarChart = ({days, name}: Props) => {
 
     if (days.length === 0) return <p>No data yet</p>
-console.log(days)
+
     return (
         <BarChart
-            style={{ width: '100%', aspectRatio: 1.618 }}
+            style={{ width: '100%', height: '100%' }}
             responsive
             data={days}
             margin={{

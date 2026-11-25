@@ -1,14 +1,30 @@
 import { supabase } from '../lib/supabase'
+import type { Session } from '@supabase/supabase-js'
+import { useState, useEffect } from 'react'
 
 export function useSession() {
-    async function signIn(email: string, password: string) {
-        console.log('this signIn as well!!')
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
-        if (error) return error
+    const [session, setSession] = useState<Session | null>(null)
+    const [loading, setLoading] = useState<Boolean>(true)
 
-        const { data } = await supabase.auth.getSession()
-        //console.log(data.session?.user.app_metadata) 
-        //console.log(data.session?.user.email) // the logged-in user's email, or undefined
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data }) => {
+            setSession(data.session)
+            setLoading(false)
+        })
+
+        const { data: { subscription }} = supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+
+        return () => subscription.unsubscribe()
+    }, [])
+
+    async function signOut() {
+        await supabase.auth.signOut()
     }
-    return { signIn }
+    async function signIn(email: string, password: string) {
+        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        return error
+    }
+    return { session, loading, signIn, signOut }
 }
