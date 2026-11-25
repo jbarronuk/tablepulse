@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import './App.css'
-import HomePage from './HomePage'
-import LoginPage from "./LoginPage"
-import ProtectedRoute from "./ProtectedRoute"
-import { tables } from "./tables"
-import TablePage from "./TablePage"
-import Nav from "./Nav"
+import HomePage from './pages/HomePage'
+import LoginPage from "./pages/LoginPage"
+import ProtectedRoute from "./components/ProtectedRoute"
+import { tables } from "./config/tables"
+import TablePage from "./pages/TablePage"
+import Nav from "./components/Nav"
 
 function App() {  
   return (

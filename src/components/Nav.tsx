@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useSession } from "./hooks/useSession"
-import { tables } from "./tables"
+import { useSession } from "../hooks/useSession"
+import { tables } from "../config/tables"
 
 function Nav() {
 

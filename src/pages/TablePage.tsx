@@ -1,5 +1,5 @@
-import SimpleBarChart from "./components/BarChart"
-import { useDailyCounts } from "./hooks/useDailyCounts"
+import SimpleBarChart from "../components/BarChart"
+import { useDailyCounts } from "../hooks/useDailyCounts"
 
 type Props = {
     table: string
