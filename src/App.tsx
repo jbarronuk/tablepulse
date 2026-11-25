@@ -1,24 +1,28 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import './App.css'
 import HomePage from './HomePage'
-import UsersPage from './UsersPage'
-import SitesPage from "./SitesPage"
 import LoginPage from "./LoginPage"
 import ProtectedRoute from "./ProtectedRoute"
+import { tables } from "./tables"
+import TablePage from "./TablePage"
+import Nav from "./Nav"
 
 function App() {  
   return (
     <BrowserRouter>
       <div style={{ display: 'flex', flexDirection: 'column', height: '100dvh' }}>
-        <nav>
-          <Link to="/">Home</Link> | <Link to="/users">Users</Link> | <Link to="/sites">Sites</Link> | <Link to="/login">Login</Link>
-        </nav>
+        <Nav />
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<HomePage />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/users" element={<UsersPage />} />
-            <Route path="/sites" element={<SitesPage />} />
+            {tables.map(t => (
+              <Route
+                key={t.path}
+                path={t.path}
+                element={<TablePage key={t.table} table={t.table} label={t.label} />}
+              />
+            ))}
           </Route>
           
         </Routes>
